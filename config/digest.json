@@ -1,0 +1,25 @@
+{
+  "project_id": 14191605,
+  "domain": "vericomedia.ru",
+  "model": "gpt-5.6-terra",
+  "live_enabled": false,
+  "regulation_approved": false,
+  "badge_live_test_passed": false,
+  "production_runner_verified": false,
+  "max_output_tokens": 9000,
+  "max_search_calls": 5,
+  "rates_usd_per_million": {"input": 2, "output": 12},
+  "search_usd_per_call": 0.01,
+  "source_domains": ["yandex.ru", "yandex.com", "advertising.yandex.ru", "openai.com", "blog.google", "developers.google.com", "avito.tech", "vk.company"],
+  "related": [
+    {"title":"Новости маркетинга 19-24 октября 2026", "url":"https://vericomedia.ru/news/daijest/novosti-marketinga-19-24-oktyabrya-2026"},
+    {"title":"SEO и продвижение в Алисе", "url":"https://vericomedia.ru/news/seo-i-prodvizhenie-v-alise-yandeks-2026"},
+    {"title":"Новости маркетинга 7-12 сентября 2026", "url":"https://vericomedia.ru/news/daijest/novosti-marketinga-7-12-sentyabrya-2026"}
+  ],
+  "tools": [
+    {"title":"Калькулятор рекламного бюджета", "url":"https://vericomedia.ru/tools/budget-calculator"},
+    {"title":"Калькулятор ДРР", "url":"https://vericomedia.ru/tools/drr-kalkulyator"},
+    {"title":"Генератор UTM-меток", "url":"https://vericomedia.ru/tools/utm-generator"}
+  ],
+  "ignored_badge_urls": ["https://static.tildacdn.com/tild6535-3963-4430-b365-346261316661/_.png"]
+}

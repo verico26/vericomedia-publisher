@@ -1,0 +1,36 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Synthetic editor fixture — NOT Tilda</title>
+<style>body{font:16px system-ui;max-width:960px;margin:32px auto;padding:0 24px}form{display:grid;gap:12px}label{display:grid;gap:4px}input,textarea{font:inherit;padding:8px}textarea{min-height:70px}button{padding:10px;margin:12px 0}#status{color:#175c30;font-weight:600}</style>
+<h1>VericoMedia — synthetic fixture</h1>
+<p>This is a test fixture, not the Tilda editor.</p>
+<div id="auth"></div><div id="drafts"></div>
+<button id="create">Create test draft</button>
+<form id="editor" hidden>
+<label>Page title<input name="title"></label>
+<label>SEO title<input name="seo_title"></label>
+<label>Description<textarea name="description"></textarea></label>
+<label>URL slug<input name="slug"></label>
+<label>Page badge image<input name="image"></label>
+<label>Cover image<input name="cover"></label>
+<label>T123 HTML<textarea name="html"></textarea></label>
+<label>Noindex<input name="noindex" type="checkbox"></label>
+<button type="submit">Save draft</button></form><p id="status"></p>
+<script>
+const drafts = JSON.parse(localStorage.getItem('drafts') || '[]');
+const authenticated = document.cookie.includes('fixture_session=synthetic');
+document.querySelector('#auth').textContent = authenticated ? 'Authenticated fixture user' : 'Login required';
+document.querySelector('#create').disabled = !authenticated;
+document.querySelector('#drafts').textContent = `${drafts.length} drafts`;
+document.querySelector('#create').onclick = () => {
+  drafts.push({id: `fixture-${drafts.length+1}`, status: 'incomplete'});
+  localStorage.setItem('drafts',JSON.stringify(drafts));
+  document.querySelector('#drafts').textContent = `${drafts.length} drafts`;
+  document.querySelector('#editor').hidden = false;
+};
+document.querySelector('#editor').onsubmit = event => {
+  event.preventDefault();
+  const data = Object.fromEntries(new FormData(event.target));
+  Object.assign(drafts[drafts.length-1], data, {status:'draft'});
+  localStorage.setItem('drafts', JSON.stringify(drafts));
+  document.querySelector('#status').textContent = 'Draft saved';
+};
+</script></html>

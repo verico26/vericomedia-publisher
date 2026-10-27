@@ -1,0 +1,7 @@
+{
+  "id": "example-article",
+  "slug": "example-article",
+  "title": "Тестовая статья — не публиковать",
+  "html": "<p>Пример материала.</p>",
+  "enabled": false
+}

@@ -1,0 +1,39 @@
+name: Browser prototype (SYNTHETIC ONLY)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: browser-prototype-fixture
+  cancel-in-progress: false
+jobs:
+  fixture:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements-browser.txt
+      - run: python -m playwright install --with-deps chromium
+      - name: Unit and browser tests (all network routed to fixture)
+        run: python -m unittest discover -s tests -v
+        env:
+          PYTHONPATH: src
+          RUN_BROWSER_TESTS: '1'
+      - name: Produce synthetic draft and screenshot
+        run: python -m vericomedia_publisher.browser_prototype --output artifacts/browser
+        env:
+          PYTHONPATH: src
+      - name: Synthetic screenshots and result only — never session/trace
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: synthetic-browser-${{ github.run_id }}
+          path: |
+            artifacts/browser/fixture-*.png
+            artifacts/browser/result.json
+            artifacts/browser-tests/fixture-*.png
+          retention-days: 3
+          if-no-files-found: warn

@@ -1,0 +1,13 @@
+{
+  "project_name": "VericoMedia",
+  "article_id": "browser-prototype-001",
+  "slug": "automation-test-browser-001",
+  "title": "Тест автоматизации — не публиковать",
+  "seo_title": "Тестовая статья VericoMedia",
+  "description": "Синтетический материал для проверки облачного браузера.",
+  "html": "<h1>Тестовая статья</h1><p>Синтетический материал, не публиковать.</p>",
+  "page_image_url": "https://static.tildacdn.com/example-placeholder/cover.png",
+  "cover_source": "page-badge",
+  "noindex": true,
+  "enabled": false
+}

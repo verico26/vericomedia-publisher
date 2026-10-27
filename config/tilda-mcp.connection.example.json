@@ -1,0 +1,15 @@
+{
+  "status": "awaiting_connection_metadata",
+  "priority": "existing_tilda_mcp",
+  "native_codex_cloud_support": "unverified_for_this_account",
+  "url": null,
+  "transport": null,
+  "auth_type": null,
+  "token_env_name": "TILDA_MCP_TOKEN",
+  "project_id": null,
+  "project_name_reported_by_user": "Галерея маркетинга Верико",
+  "allowed_discovery_methods": ["initialize", "notifications/initialized", "tools/list"],
+  "allowed_tools": [],
+  "writes_enabled": false,
+  "publishing_enabled": false
+}
