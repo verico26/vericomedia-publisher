@@ -92,11 +92,18 @@ async def _public(url,article,output):
             await page.screenshot(path=str(output/f'public-{width}.png'),full_page=True)
             results.append(metric)
         if await page.locator('.vg-related__grid a').count()!=6:raise PipelineError('public_cards_failed')
+        if await page.locator('[data-tooltip-hook="#popup:popupzayavka"]').count()==0:
+            raise PipelineError('existing_popup_target_missing')
         for section in article['sections']:
             node=page.locator('#'+section['id'])
             if await node.count()!=1 or not await node.locator('.vg-sources a').count():raise PipelineError('public_source_or_anchor_missing')
+        from urllib.parse import urlsplit
+        expected_path=urlsplit(url).path.rstrip('/')
+        await page.goto('https://vericomedia.ru/news/',wait_until='networkidle',timeout=60000)
+        index_paths=await page.locator('a[href]').evaluate_all('(links)=>links.map(a=>{const p=new URL(a.href).pathname;return p.endsWith("/")?p.slice(0,-1):p})')
+        appears=expected_path in index_paths
         await browser.close()
-    report={'passed':True,'url':url,'http_status':200,'viewports':results,'mode':'real_public_browser'}
+    report={'appears_in_news_index':appears,'passed':True,'url':url,'http_status':200,'viewports':results,'mode':'real_public_browser'}
     dump(output/'qa-public.json',report)
     return report
 

@@ -93,6 +93,7 @@ def run(publication_date,mode,output,config=None,model=None,qa=None,now=None):
             report['published']=True
             stage='public_layout'
             report['public_quality']=check_public(report['url'],edited,output/'screenshots')
+            report['appears_in_news_index']=report['public_quality']['appears_in_news_index']
         return report
     except Exception as error:
         report.update(status='failed',failed_stage=stage,error_code=str(error) if isinstance(error,PipelineError) else type(error).__name__)
