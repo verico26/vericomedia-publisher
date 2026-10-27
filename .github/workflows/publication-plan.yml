@@ -58,6 +58,9 @@ jobs:
         env:
           PYTHONPATH: src
           RUN_BROWSER_TESTS: '1'
+      - name: Probe MCP HTTPS endpoint without credentials or write tools
+        if: steps.run.outputs.allowed == 'true'
+        run: python scripts/probe_mcp_endpoint.py
       - name: Check artifact protection before paid or private operations
         if: steps.run.outputs.allowed == 'true' && steps.run.outputs.mode != 'fixture'
         env:
