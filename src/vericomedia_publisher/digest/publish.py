@@ -24,7 +24,7 @@ def prepare_settings(client,page,window,article):
 
 def validate_gate(config,mode,qa,window):
     if mode!='publish' or not all(config.get(k) is True for k in
-        ('live_enabled','regulation_approved','badge_live_test_passed','production_runner_verified')):
+        ('live_enabled','regulation_approved','badge_live_test_passed','production_runner_verified','existing_popup_verified')):
         raise PipelineError('live_publication_not_approved_or_unverified')
     if not qa.get('passed') or not window.get('complete_week'):
         raise PipelineError('publication_quality_or_period_gate_failed')

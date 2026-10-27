@@ -88,7 +88,7 @@ runner использует matching Chromium из playwright install.
 
 Режимы: fixture — синтетика без внешних вызовов; preflight — реальное MCP-чтение;
 dry-run — реальные платные research/writer/editor/factcheck + QA без записи;
-publish — закрыт четырьмя deployment-gates. Директория результата должна быть
+publish — закрыт пятью deployment-gates. Директория результата должна быть
 пустой/новой, чтобы не смешивать отчёты разных запусков.
 
 ## Проверка Actions

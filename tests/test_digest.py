@@ -111,7 +111,7 @@ class DigestTests(unittest.TestCase):
         c.rpc.assert_not_called()
 
     def test_existing_remote_slug_stops_before_claim(self):
-        config=self.config|dict(live_enabled=True,regulation_approved=True,badge_live_test_passed=True,production_runner_verified=True)
+        config=self.config|dict(live_enabled=True,regulation_approved=True,badge_live_test_passed=True,production_runner_verified=True,existing_popup_verified=True)
         client=Mock()
         client.call.side_effect=[[{'id':'14191605','url':'https://vericomedia.ru'}],[{'alias':self.window['slug']}]]
         journal=Mock()
@@ -126,7 +126,7 @@ class DigestTests(unittest.TestCase):
         journal.put.assert_not_called()
 
     def test_publish_unknown_outcome_reads_before_any_retry(self):
-        config=self.config|dict(live_enabled=True,regulation_approved=True,badge_live_test_passed=True,production_runner_verified=True)
+        config=self.config|dict(live_enabled=True,regulation_approved=True,badge_live_test_passed=True,production_runner_verified=True,existing_popup_verified=True)
         a=fixtures.article();existing={'id':'42','alias':'existing','published':'old'}
         class Client:
             def __init__(self,published):self.published=published;self.publish_count=0;self.created=False;self.code='';self.settings={}

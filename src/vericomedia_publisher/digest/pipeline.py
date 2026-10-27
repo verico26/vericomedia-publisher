@@ -48,7 +48,7 @@ def run(publication_date,mode,output,config=None,model=None,qa=None,now=None):
         now=now or datetime.now(timezone.utc)
         window['complete_week']=now.date()>datetime.fromisoformat(window['end']).date()
         if mode=='publish':
-            if not all(config.get(k) is True for k in ('live_enabled','regulation_approved','badge_live_test_passed','production_runner_verified')):
+            if not all(config.get(k) is True for k in ('live_enabled','regulation_approved','badge_live_test_passed','production_runner_verified','existing_popup_verified')):
                 raise PipelineError('live_publication_not_approved_or_unverified')
             if now.date().isoformat()!=publication_date or not window['complete_week']:
                 raise PipelineError('wrong_live_publication_date')
