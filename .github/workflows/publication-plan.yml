@@ -61,6 +61,14 @@ jobs:
       - name: Probe MCP HTTPS endpoint without credentials or write tools
         if: steps.run.outputs.allowed == 'true'
         run: python scripts/probe_mcp_endpoint.py
+      - name: Check GitHub secret presence and MCP read access when configured
+        if: steps.run.outputs.allowed == 'true'
+        env:
+          PYTHONPATH: src
+          TILDA_MCP_TOKEN: ${{ secrets.TILDA_MCP_TOKEN }}
+          VERICO_LLM_API_KEY: ${{ secrets.VERICO_LLM_API_KEY }}
+          VERICO_ARTIFACT_KEY: ${{ secrets.VERICO_ARTIFACT_KEY }}
+        run: python scripts/probe_runner_auth.py
       - name: Check artifact protection before paid or private operations
         if: steps.run.outputs.allowed == 'true' && steps.run.outputs.mode != 'fixture'
         env:
